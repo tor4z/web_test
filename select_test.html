@@ -1,0 +1,40 @@
+<html>
+    <meta charset="utf-8">
+    <body>
+        <p model-in='in'>123</p>
+        <p model-in='in1'></p>
+        <p model-in='in2'></p>
+        <p model-in='in3'></p>
+        <div model-out='out'></div>
+    </body>
+    <script>
+        class ModelIn {
+            constructor() {
+                let inputs = document.querySelectorAll("[model-in]");
+                this._map = new Map();
+                for(const input of inputs) {
+                    this._map.set(input.getAttribute("model-in"), input);
+                }
+            }
+
+            get(key) {
+                return this._map.get(key)
+            }
+
+            getValue(key) {
+                let ele = this.get(key);
+                if(ele != undefined) {
+                    return ele.innerText;
+                } else {
+                    return undefined;
+                }
+            }
+        }
+
+        let min = new ModelIn();
+        let ele = min.get("in");
+        let val = min.getValue("in");
+        console.log(ele);
+        console.log(val);
+    </script>
+</html>
